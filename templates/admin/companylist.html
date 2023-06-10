@@ -1,0 +1,113 @@
+{% extends 'admin/base1.html' %}
+
+{% block content %}
+
+<body id="page-top">
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Company Tables</h1>
+        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+            For more information about DataTables, please visit the <a target="_blank"
+                href="https://datatables.net">official DataTables documentation</a>.</p>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Verified</th>
+                                <th>Created_at</th>
+                                <th>Updated_at</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        {% comment %} <tfoot>
+                            <tr>
+                                <th>Job Name</th>
+                                <th>Company Name</th>
+                                <th>Location</th>
+                                <th>Company Website</th>
+                                <th>Experience</th>
+                                <th>Salary Package</th>
+                            </tr>
+                        </tfoot> {% endcomment %}
+                        {% if all_user %}
+                        <tbody>
+                            {% for i in all_user %}
+                            <tr>
+                                <td>{{i.email}}</td>
+                                <td>{{i.role}}</td>
+                                <td>{{i.is_verified}}</td>
+                                <td>{{i.is_created}}</td>
+                                <td>{{i.is_update}}</td>
+                                <td>
+                                    <form action="{% url 'verify' pk=i.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Update
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Company Update</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <select name="verify" class="form-select" aria-label="Default select example">
+          <option disabled selected>Company Verified</option>
+          <option value="True">True</option>
+          <option value="Flase">Flase</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+                                        {% comment %} <input type="submit" value="Update"> {% endcomment %}
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{% url 'companydelete' pk=i.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <!-- Button trigger modal -->
+                                        <button type="submit" class="btn btn-primary">Delete</button>
+    
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+
+{% endblock content %}
