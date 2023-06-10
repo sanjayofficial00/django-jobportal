@@ -1,0 +1,63 @@
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light">
+        <div class="container">
+        <a class="navbar-brand" href="index.html">JobPortal</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+        </button>
+        <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto" style="margin-right: -110px;">
+        <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>
+        <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+        {% if role == "Candidate" %}
+        <li class="nav-item cta cta-colored"><a href="{% url 'job-post' %}" class="nav-link">Want a Job</a></li>
+        {% else %}
+            {% if role == "Company" %}
+            <li class="nav-item cta mr-md-2"><a href="{% url 'new-post' %}" class="nav-link">Post a Job</a></li>
+            {% endif %}
+        {% endif %}
+        </ul>
+        {% if role == "Candidate" %}
+            {% if request.session.firstname or request.session.lastname and request.session.profile_pic %}
+            <div class="navbar-nav ml-auto nav-item dropdown">
+                <a href="#" class="nav-item nav-link notifications" style="margin-top: 13px;"><i class="fa fa-bell-o"></i><span class="badge">1</span></a>
+		    	<a href="#" class="nav-item nav-link messages" style="margin-top: 13px;"><i class="fa fa-envelope-o"></i><span class="badge">10</span></a></a> 
+		    	<div class="nav-item dropdown" style="margin-right: -90px;">
+                <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img src="{{profile_pic}}" class="avatar" style="
+                    width: 55px;
+                    height: 55px;
+                    border-radius: 26px;
+                    margin-right: 5px;" alt="Avatar"> {{request.session.firstname}} {{request.session.lastname}} <b class="caret"></b></a>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item"><i class="fa fa-user"></i>{{role}}</a></a>
+                    <a href="{% url 'profile' pk=request.session.id %}" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></a>
+                    {% comment %} <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></a> {% endcomment %}
+                    <div class="dropdown-divider"></div>
+                    <a href="{% url 'home' %}" class="dropdown-item"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></a>
+                </div>
+            </div>
+            {% endif %}
+        {% else %}
+            <div class="navbar-nav ml-auto nav-item dropdown">
+                <div class="nav-item dropdown" style="margin-right: -90px;">
+                <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img src="/static/candidate/images/profile.png " class="avatar" style="
+                    width: 55px;
+                    height: 55px;
+                    border-radius: 26px;
+                    margin-right: 5px;" alt="Avatar">Login Now<b class="caret"></b></a>
+                <div class="dropdown-menu">
+                    {% comment %} <a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></a> {% endcomment %}
+                    {% comment %} <a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> Calendar</a></a> {% endcomment %}
+                    {% comment %} <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a></a> {% endcomment %}
+                    <div class="dropdown-divider"></div>
+                    <a href="{% url 'register' %}" class="dropdown-item"><i class="fa fa-user-plus" aria-hidden="true"></i> SignUp</a></a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{% url 'login' %}" class="dropdown-item"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></a>
+                </div>
+            </div>
+        {% endif %}
+        </div>
+        </div>
+        </nav>  

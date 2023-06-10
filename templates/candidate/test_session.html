@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Session</title>
+</head>
+<body>
+    {% if request.session.firstname and request.session.lastname %}
+        <p>First Name_ {{ request.session.id }}</p>
+        <p>Last Name_ {{ request.session.role }}</p>
+        <img src="{{candidate.profile_pic.urls}}" alt="">
+    {% else %}
+        <p>Session variables not set.</p>
+    {% endif %}
+</body>
+</html>

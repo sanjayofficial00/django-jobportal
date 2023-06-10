@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/candidate/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="/static/candidate/css/profile.css">
+    <link rel="stylesheet" href="/static/candidate/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">     
+    <title>Document</title>
+</head>
+<body>
+    <form action="{% url 'updateprofile' pk=request.session.id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="container-xl px-4 mt-4">
+        <!-- Account page navigation-->
+        <nav class="nav nav-borders">
+            <a class="nav-link active ms-0" href="https://www.bootdey.com/snippets/view/bs5-edit-profile-account-details" target="__blank">Profile</a>
+            <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-billing-page" target="__blank">Billing</a>
+            <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-profile-security-page" target="__blank">Messages</a>
+            <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page"  target="__blank">Notifications</a>
+        </nav>
+        <hr class="mt-0 mb-4">
+        <div class="row">
+            <div class="col-xl-4" style="width: 26%;
+            margin-right: 30px;
+            margin-left: 13px;">
+                <!-- Profile picture card-->
+                <div class="card mb-4 mb-xl-0">
+                    <div class="card-header">Profile Picture</div>
+                    <div class="card-body text-center">
+                        <!-- Profile picture image-->
+                        <img class="img-account-profile rounded-circle mb-2" src="{% if user.role == 'Candidate' %}/media/{{candidate.profile_pic}} {% else %}/media/{{company.hr_pic}}{% endif %} " alt="">
+                        <!-- Profile picture help block-->
+                        <input type="file" name="image">
+                        <div class="small font-italic text-muted my-4">JPG or PNG no larger than 5 MB</div>
+                        <!-- Profile picture upload button-->
+                        <button class="btn btn-primary" type="submit">Upload new image</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8" style="width: 65%;
+            margin-left: 9px;">
+                <!-- Account details card-->
+                <div class="card mb-4" style="padding-right: 40px;
+                padding-left: 30px;">
+                    <div class="card-header" style="width: 112%;
+                    margin-left: -30px;">Account Details</div>
+                    <div class="card-body">
+                        <form>
+                            <!-- Form Group (username)-->
+                            <div class="mb-3">
+                                <label class="small mb-1" for="inputUsername">Username (how your name will appear to other users on the site)</label>
+                                <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="{% if user.role == 'Candidate' %}{{candidate.firstname}} {{candidate.lastname}} {% else %}{{company.firstname}} {{company.lastname}}{% endif %}">
+                            </div>
+                            <!-- Form Row-->
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (first name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputFirstName">First name</label>
+                                    <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" name="firstname" value="{% if user.role == 'Candidate' %}{{candidate.firstname}} {% else %} {{company.firstname}} {% endif %}">
+                                </div>
+                                <!-- Form Group (last name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputLastName">Last name</label>
+                                    <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" name="lastname" value="{% if user.role == 'Candidate' %}{{candidate.lastname}} {% else %} {{company.lastname}}{% endif %}">
+                                </div>
+                            </div>
+                            <!-- Form Row        -->
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (organization name)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputOrgName">Email Address</label>
+                                    <input class="form-control" name="email" id="inputOrgName" type="text" placeholder="Enter your Email Address" value="{{user.email}}">
+                                </div>
+                                <!-- Form Group (location)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputLocation">Phone Number</label>
+                                    <input class="form-control" name="phone" id="inputLocation" type="text" placeholder="Enter your Phone Number" value="">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputOrgName">State</label>
+                                    <input class="form-control" name="state" id="inputOrgName" type="text" placeholder="Enter your State" value="">
+                                </div>
+                                <!-- Form Group (location)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputLocation">City</label>
+                                    <input class="form-control" name="city" id="inputLocation" type="text" placeholder="Enter your City" value="">
+                                </div>
+                            </div>
+                            <!-- Form Group (email address)-->
+                            {% comment %} <div class="mb-3">
+                                <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                                <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@example.com">
+                            </div> {% endcomment %}
+                            <!-- Form Row-->
+                            <div class="row gx-3 mb-3">
+                                <!-- Form Group (phone number)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputPhone">Address</label>
+                                    <input class="form-control" name="address" id="inputPhone" type="tel" placeholder="Enter your Address" value="">
+                                </div>
+                                <!-- Form Group (birthday)-->
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="inputBirthday">Birthday</label>
+                                    <input class="form-control" name="dob" id="inputBirthday" type="text" name="birthday" placeholder="06/10/1988" value="">
+                                </div>
+                            </div>
+                            <!-- Save changes button-->
+                            <button class="btn btn-primary" type="submit">Save changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+    {% comment %} start footer {% endcomment %}
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+        <div class="row mb-5">
+        <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+        <h2 class="ftco-heading-2">About</h2>
+        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
+        <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+        <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+        <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+        </ul>
+        </div>
+        </div>
+        <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+        <h2 class="ftco-heading-2">Employers</h2>
+        <ul class="list-unstyled">
+        <li><a href="#" class="py-2 d-block">How it works</a></li>
+        <li><a href="#" class="py-2 d-block">Register</a></li>
+        <li><a href="#" class="py-2 d-block">Post a Job</a></li>
+        <li><a href="#" class="py-2 d-block">Advance Skill Search</a></li>
+        <li><a href="#" class="py-2 d-block">Recruiting Service</a></li>
+        <li><a href="#" class="py-2 d-block">Blog</a></li>
+        <li><a href="#" class="py-2 d-block">Faq</a></li>
+        </ul>
+        </div>
+        </div>
+        <div class="col-md">
+        <div class="ftco-footer-widget mb-4 ml-md-4">
+        <h2 class="ftco-heading-2">Workers</h2>
+        <ul class="list-unstyled">
+        <li><a href="#" class="py-2 d-block">How it works</a></li>
+        <li><a href="#" class="py-2 d-block">Register</a></li>
+        <li><a href="#" class="py-2 d-block">Post Your Skills</a></li>
+        <li><a href="#" class="py-2 d-block">Job Search</a></li>
+        <li><a href="#" class="py-2 d-block">Emploer Search</a></li>
+        </ul>
+        </div>
+        </div>
+        <div class="col-md">
+        <div class="ftco-footer-widget mb-4">
+        <h2 class="ftco-heading-2">Have a Questions?</h2>
+        <div class="block-23 mb-3">
+        <ul>
+        <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+        <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+        <li><a href="#"><span class="icon icon-envelope"></span><span class="text"><span class="__cf_email__" data-cfemail="9cf5f2faf3dce5f3e9eef8f3f1fdf5f2b2fff3f1">[email&#160;protected]</span></span></a></li>
+        </ul>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-md-12 text-center">
+        <p>
+        Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-/static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+        </p>
+        </div>
+        </div>
+        </div>
+        </footer>
+        {% comment %} end footer {% endcomment %}
+</body>
+</html>

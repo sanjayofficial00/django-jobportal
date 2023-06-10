@@ -1,0 +1,123 @@
+{% extends 'company/base1.html' %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'jobupdate' pk=request.session.id %}" enctype="multipart/form-data">
+  {% csrf_token %}
+    <!-- 2 column grid layout with text inputs for the first and last names -->
+    <div style="margin-right: 50px; margin-left: 50px;">
+        <h1 style="text-align:center; padding-bottom: 10px;">Job Details Form</h1>
+    <div class="row mb-4">
+      <div class="col">
+        <div class="form-outline">
+          <input type="text" name="jobname" id="form6Example1" class="form-control" />
+          <label class="form-label" for="form6Example1">Job name</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline">
+          <input type="text" name="companyname" id="form6Example2" class="form-control" />
+          <label class="form-label" for="form6Example2">Company name</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col">
+        <div class="form-outline">
+          <textarea class="form-control" name="companyaddress" id="form6Example7" rows="4"></textarea>
+          <label class="form-label" for="form6Example1">Company Address</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline">
+          <textarea class="form-control" name="jobdescription" id="form6Example7" rows="4"></textarea>
+          <label class="form-label" for="form6Example2">Job Discription</label>
+        </div>
+      </div>
+    </div>
+  
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <input type="text" id="form6Example1" name="qualification" class="form-control" />
+            <label class="form-label" for="form6Example1">Qualification</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <input type="text" id="form6Example2" name="responsibilities" class="form-control" />
+            <label class="form-label" for="form6Example2">Responsibility</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <input type="text" id="form6Example1" name="locations" class="form-control" />
+            <label class="form-label" for="form6Example1">Location</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <input type="text" id="form6Example2" name="companywebsite" class="form-control" />
+            <label class="form-label" for="form6Example2">Website</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <input type="text" id="form6Example1" name="companyemail" class="form-control" />
+            <label class="form-label" for="form6Example1">Email</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <input type="text" id="form6Example2" name="companycontact" class="form-control" />
+            <label class="form-label" for="form6Example2">Contact</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <input type="text" id="form6Example1" name="experience" class="form-control" />
+            <label class="form-label" for="form6Example1">Experience</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <input type="text" id="form6Example2" name="salarypackage" class="form-control" />
+            <label class="form-label" for="form6Example2">Salary Package</label>
+          </div>
+        </div>
+      </div>
+    <!-- Text input -->
+    <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <input type="file" class="form-control" name="logo" id="customFile" />
+            <label class="form-label" for="customFile">Company Logo</label>
+          </div>
+        </div>
+        <div class="col">
+            <select class="form-select" name="jobtype" aria-label="Default select example">
+                <option class="hidden" selected disabled>Job Type</option>
+                <option value="Part Time">Part Time</option>
+                <option value="Full Time">Full Time</option>
+                <option value="Temporary">Temporary</option>
+                <option value="Freelance">Freelance</option>
+                <option value="Intership">Intership</option>
+              </select>
+        </div>
+      </div>
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block mb-4" style="">Job Post</button>
+    </div>
+  </form>
+
+{% endblock content %}
